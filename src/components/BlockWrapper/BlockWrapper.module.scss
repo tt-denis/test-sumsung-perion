@@ -1,0 +1,13 @@
+$blockPadding: 6.5%;
+
+.blockWrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../../assets/img/bg.png") center;
+  background-size: 100%;
+  padding: $blockPadding;
+  box-sizing: border-box;
+}
