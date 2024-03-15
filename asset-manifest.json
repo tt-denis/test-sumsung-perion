@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/test-sumsung-perion/static/css/main.5b7ca679.css",
+    "main.js": "/test-sumsung-perion/static/js/main.f4ddacca.js",
+    "static/media/bg.png": "/test-sumsung-perion/static/media/bg.94fecfb1d518c2d888d8.png",
+    "static/media/vacuum_placeholder_1.png": "/test-sumsung-perion/static/media/vacuum_placeholder_1.c457d9842db17abbb59d.png",
+    "static/media/vacuum_placeholder_5.png": "/test-sumsung-perion/static/media/vacuum_placeholder_5.a58aa8ac8096920659d9.png",
+    "static/media/vacuum_placeholder_2.png": "/test-sumsung-perion/static/media/vacuum_placeholder_2.459a42d3f2db73526d89.png",
+    "static/media/vacuum_placeholder_4.png": "/test-sumsung-perion/static/media/vacuum_placeholder_4.90c474da8e69fa353efc.png",
+    "static/media/vacuum_placeholder_3.png": "/test-sumsung-perion/static/media/vacuum_placeholder_3.9ed7e96a9c3e1986e9f2.png",
+    "static/media/kitchn_logo.png": "/test-sumsung-perion/static/media/kitchn_logo.4888d41c02bf54b6e85b.png",
+    "index.html": "/test-sumsung-perion/index.html",
+    "main.5b7ca679.css.map": "/test-sumsung-perion/static/css/main.5b7ca679.css.map",
+    "main.f4ddacca.js.map": "/test-sumsung-perion/static/js/main.f4ddacca.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5b7ca679.css",
+    "static/js/main.f4ddacca.js"
+  ]
+}
