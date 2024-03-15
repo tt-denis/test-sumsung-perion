@@ -1,7 +1,6 @@
 {
   "name": "test-sumsung-perion",
   "version": "0.1.0",
-  "type": "module",
   "homepage": "https://tt-denis.github.io/test-sumsung-perion",
   "private": true,
   "dependencies": {
