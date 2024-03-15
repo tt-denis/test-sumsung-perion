@@ -1,19 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './Block.module.scss';
-import placeholder1 from '../../../../assets/img/vacuum_placeholder_1.png';
-import placeholder2 from '../../../../assets/img/vacuum_placeholder_2.png';
-import placeholder3 from '../../../../assets/img/vacuum_placeholder_3.png';
-import placeholder4 from '../../../../assets/img/vacuum_placeholder_4.png';
-import placeholder5 from '../../../../assets/img/vacuum_placeholder_5.png';
 import kitchnLogo from '../../../../assets/img/kitchn_logo.png';
 import samsungLogo from '../../../../assets/img/samsung_logo.png';
-import leftArrow from '../../../../assets/img/left_arrow.png';
-import rightArrow from '../../../../assets/img/right_arrow.png';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import SliderText from './SliderText/SliderText';
+import SlidePlaceholder from './SliderPlaceholder/SlidePlaceholder';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
-import { Autoplay, EffectFade, Navigation } from 'swiper/modules';
 
 const Block = () => {
 	const sliderRef = useRef<any>(null);
@@ -28,34 +21,7 @@ const Block = () => {
 	const [animationEnd, setAnimationEnd] = useState(false);
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [autoPlay, setAutoPlay] = useState(false);
-	const [shopNowAnimationStop, setShopNowAnimationStop] = useState(false);
 
-	const runShopNowAnimationStop = () => {
-		if (!shopNowAnimationStop) {
-			shopNowRef.current.style.animation = 'none';
-			setShopNowAnimationStop(true);
-		}
-	};
-
-	const handleNext = () => {
-		sliderRef.current.swiper.slideNext(300);
-		sliderTextRef.current.swiper.slideNext(300);
-		setCurrentSlide(sliderRef.current?.swiper.realIndex);
-		if (autoPlay) {
-			sliderTextRef.current.swiper.autoplay.stop();
-			sliderRef.current.swiper.autoplay.stop();
-		}
-	};
-
-	const handlePrevious = () => {
-		sliderRef.current.swiper.slidePrev(300);
-		sliderTextRef.current.swiper.slidePrev(300);
-		setCurrentSlide(sliderRef.current?.swiper.realIndex);
-		if (autoPlay) {
-			sliderTextRef.current.swiper.autoplay.stop();
-			sliderRef.current.swiper.autoplay.stop();
-		}
-	};
 	useEffect(() => {
 		setCurrentSlide(sliderRef.current?.swiper.realIndex);
 	}, [currentSlide]);
@@ -105,7 +71,7 @@ const Block = () => {
 		return animation.finished;
 	};
 
-	const runTextAnimation = (elem: Element | null, delay = 0): Promise<Animation> => {
+	const runTextAnimation = (elem: Element, delay = 0): Promise<Animation> => {
 		const keyframes: Keyframe[] = [
 			{ transform: 'translateX(-100%)', opacity: 0, offset: 0 },
 			{ transform: 'translateX(0%)', opacity: 1, offset: 1 },
@@ -161,10 +127,10 @@ const Block = () => {
 	const runShowSlideInfo = (): Promise<Animation[]> => {
 		const sliderText = document.getElementById('sliderText');
 
-		console.log(sliderTextRef.current);
 		if (sliderText) {
 			sliderText.style.visibility = 'visible';
 		}
+
 		const keyframes: Keyframe[] = [
 			{ opacity: 0 },
 			{ opacity: 1 },
@@ -196,117 +162,37 @@ const Block = () => {
 		return Promise.all([animation1.finished, animation2.finished, animation3.finished]);
 	};
 
-	const openBlank = () => {
-		window.open('', '_blank');
-	};
-
 	return (
 		<div className={styles.block}>
 			<div className={styles.contentWrapper}>
 				<div className={styles.leftSideContent}>
 					<div className={styles.leftSide}>
-						<img ref={logoRef} className={styles.sumsungLogo} src={samsungLogo} alt={''} />
+						<img ref={logoRef} className={styles.sumsungLogo} src={samsungLogo} alt={'Sumsung'} />
 						<div className={styles.leftSideTextWrapper}>
 							<div ref={text1Ref} className={styles.leftSideText}>See why the Bespoke Jet<span>™</span>
 							</div>
 							<div ref={text2Ref} className={styles.leftSideText}>is “so good” it made this</div>
 							<div ref={text3Ref} className={styles.leftSideText}>
-								<img className={styles.kitchnLogo} src={kitchnLogo} alt={'Kitchn Logo'} /> journalist
-								cry
+								<img className={styles.kitchnLogo} src={kitchnLogo} alt={'Kitchn'} /> journalist cry
 							</div>
-							<div className={styles.sliderTextWrapper} id={'sliderText'}>
-								<Swiper ref={sliderTextRef} className={`${styles.swiperTextPosition} swiper-no-swiping`}
-										style={{ margin: 0 }} modules={[Autoplay, EffectFade, Navigation]}
-										loop={true} speed={300}
-										onAutoplay={(swiper: any) => setCurrentSlide(swiper.realIndex)}
-										autoHeight={true}
-								>
-									<SwiperSlide>
-										<div className={styles.sliderTextSlide}>
-											“The first time I used the Samsung Bespoke Jet™,<br />
-											I cried. I’m not being sensational; I really did.<br />
-											Of course, this vacuum worked great.<br />
-											But that’s not all.”
-											<span onClick={openBlank}> Read more…</span>
-										</div>
-									</SwiperSlide>
-									<SwiperSlide>
-										<div className={styles.sliderTextSlide}>
-											“If you’re an over-cleaner, like myself, you’ll nerd<br />
-											out on all of the functions. If you avoid this chore<br />
-											at all costs, you’ll appreciate how simple<br />
-											Samsung makes it.”
-											<span onClick={openBlank}> Read more…</span>
-										</div>
-									</SwiperSlide>
-									<SwiperSlide>
-										<div className={styles.sliderTextSlide}>
-											“Both the floor and pet hair attachments are<br />
-											cleverly designed to eliminate the dreaded hair<br />
-											wrap. (In other words, you’ll never have to tackle<br />
-											hair tangles with a pair of scissors again.)” <br />
-											<span onClick={openBlank}> Read more…</span>
-										</div>
-									</SwiperSlide>
-									<SwiperSlide>
-										<div className={styles.sliderTextSlide}>
-											“When I learned the Samsung Bespoke Vac cleaned itself<br />
-											with amazing technology, that’s when I cried. No more<br />
-											scraping spider legs and hair out of the crevices with my<br />
-											hands. Its suction power is so strong, the canister is left<br />
-											perfectly clean after every use. It’s like a vacuum for your<br />
-											vacuum.”
-											<span onClick={openBlank}> Read more…</span>
-										</div>
-									</SwiperSlide>
-									<SwiperSlide>
-										<div className={styles.sliderTextSlide}>
-											“Because it’s so nice-looking, it can live right in the<br />
-											kitchen. No more hauling a vacuum up and down<br />
-											the basement stairs on the daily”
-											<span onClick={openBlank}> Read more…</span>
-										</div>
-									</SwiperSlide>
-								</Swiper>
-								<div ref={navigationContainerRef} className={styles.navigationContainer}>
-									<img className={styles.arrow} onClick={handlePrevious} src={leftArrow} alt={''} />
-									<div>{currentSlide + 1}/{sliderRef.current?.swiper.slides.length}</div>
-									<img className={styles.arrow} onClick={handleNext} src={rightArrow} alt={''} />
-
-								</div>
-								<div onMouseEnter={runShopNowAnimationStop} onClick={openBlank} ref={shopNowRef} className={styles.shopNow}>SHOP NOW
-								</div>
-							</div>
+							<SliderText
+								shopNowRef={shopNowRef}
+								sliderRef={sliderRef}
+								sliderTextRef={sliderTextRef}
+								setCurrentSlide={setCurrentSlide}
+								autoPlay={autoPlay}
+								navigationContainerRef={navigationContainerRef}
+								currentSlide={currentSlide}
+							/>
 						</div>
 					</div>
 					<div className={styles.bspokeJet}>Bespoke Jet<span>™</span></div>
 				</div>
 			</div>
-			<Swiper ref={sliderRef} className={styles.swiperPosition}
-					style={{ marginRight: 0 }}
-					modules={[Autoplay, EffectFade, Navigation]}
-					effect={'fade'}
-					loop={true}
-					speed={300}
-			>
-				<SwiperSlide className={`${styles.swiperSliderWrapper} swiper-no-swiping`}>
-					<div className={styles.imgWrapperFirst}>
-						<img ref={imgFirstSlideRef} className={styles.imgFirstSlide} src={placeholder1} alt={''} />
-					</div>
-				</SwiperSlide>
-				<SwiperSlide className={styles.swiperSliderWrapper}>
-					<div className={styles.imgWrapper}><img src={placeholder2} alt={''} /></div>
-				</SwiperSlide>
-				<SwiperSlide className={styles.swiperSliderWrapper}>
-					<div className={styles.imgWrapper}><img src={placeholder3} alt={''} /></div>
-				</SwiperSlide>
-				<SwiperSlide className={styles.swiperSliderWrapper}>
-					<div className={styles.imgWrapper}><img src={placeholder4} alt={''} /></div>
-				</SwiperSlide>
-				<SwiperSlide className={styles.swiperSliderWrapper}>
-					<div className={styles.imgWrapper}><img src={placeholder5} alt={''} /></div>
-				</SwiperSlide>
-			</Swiper>
+			<SlidePlaceholder
+				sliderRef={sliderRef}
+				imgFirstSlideRef={imgFirstSlideRef}
+			/>
 		</div>
 	);
 };
